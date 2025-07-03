@@ -3,6 +3,20 @@ package recursion.medium;
 import java.util.ArrayList;
 
 public class SubsetStrings {
+    static ArrayList<String> subsetGenerator3(String p,String up)
+    {
+        if(up.isEmpty())
+        {
+            ArrayList<String> list = new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+        char ch = up.charAt(0);
+        ArrayList<String> left = subsetGenerator3(p+ch,up.substring(1));
+        ArrayList<String> right = subsetGenerator3(p,up.substring(1));
+        left.addAll(right);
+        return left;
+    }
     static void subsetGenerator1(String p,String up)
     {
         if(up.isEmpty())
@@ -28,7 +42,6 @@ public class SubsetStrings {
     public static void main(String[] args) {
        subsetGenerator1("","abc");
        ArrayList<String> list = new ArrayList<>();
-       subsetGenerator2("","abc",list);
-        System.out.println(list);
+        System.out.println( subsetGenerator3("","abc"));
     }
 }
